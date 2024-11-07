@@ -1,11 +1,10 @@
 import pandas as pd
-from fuzzywuzzy import process
 
 from machine_learning.collaborative_filtering import CollaborativeFilteringEngine
 from machine_learning.content_filtering import ContentFilteringEngine
 
-
 from fuzzywuzzy import process
+
 
 class MovieRecommendationEngine:
     def __init__(self, ratings_path, movies_path, min_ratings_threshold=5):
@@ -15,6 +14,7 @@ class MovieRecommendationEngine:
         if min_ratings_threshold < 5:
             print("Warning: min_ratings_threshold cannot be less than 5. Setting it to 5.")
             min_ratings_threshold = 5
+        requirements = ""
 
         self.min_ratings_threshold = min_ratings_threshold
         self.ratings_data = pd.read_csv(ratings_path)
@@ -26,7 +26,8 @@ class MovieRecommendationEngine:
     def _is_collaborative_applicable(self, movie_id):
         """Checks if collaborative filtering is appropriate based on the movie's rating count."""
         movie_index = self.collaborative_filtering.movie_index_map.get(movie_id)
-        return movie_index is not None and self.collaborative_filtering.movie_ratings_count[movie_index] >= self.min_ratings_threshold
+        return movie_index is not None and self.collaborative_filtering.movie_ratings_count[
+            movie_index] >= self.min_ratings_threshold
 
     def _validate_user_id(self, user_id):
         """Validates if the user ID exists in the ratings data."""
