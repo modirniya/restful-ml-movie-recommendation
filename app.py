@@ -36,6 +36,14 @@ def recommend_movies():
         "recommendations": recommendations
     }), 200
 
+@app.route('/least_rated_movies', methods=['GET'])
+def get_least_rated_movies():
+    return jsonify(recommendation_engine.least_rated_movies.to_dict()), 200
+
+@app.route('/most_rated_movies', methods=['GET'])
+def get_most_rated_movies():
+    return jsonify(recommendation_engine.most_rated_movies.to_dict()), 200
+
 # Run the Flask app on localhost
 if __name__ == '__main__':
     app.run(host="127.0.0.1", port=6000)

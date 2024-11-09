@@ -14,14 +14,22 @@ class MovieRecommendationEngine:
         if min_ratings_threshold < 5:
             print("Warning: min_ratings_threshold cannot be less than 5. Setting it to 5.")
             min_ratings_threshold = 5
-        requirements = ""
 
         self.min_ratings_threshold = min_ratings_threshold
         self.ratings_data = pd.read_csv(ratings_path)
         self.movies_data = pd.read_csv(movies_path)
         self.collaborative_filtering = CollaborativeFilteringEngine(self.ratings_data)
         self.content_filtering = ContentFilteringEngine(self.movies_data)
+        self.merged_ratings =  self.ratings_data.merge(self.movies_data, on='movieId')
         self.movie_titles = dict(zip(self.movies_data['movieId'], self.movies_data['title']))
+
+    @property
+    def most_rated_movies(self):
+        return self.merged_ratings['title'].value_counts()[0:10]
+
+    @property
+    def least_rated_movies(self):
+        return self.merged_ratings['title'].value_counts(ascending=True)[0:10]
 
     def _is_collaborative_applicable(self, movie_id):
         """Checks if collaborative filtering is appropriate based on the movie's rating count."""

@@ -41,3 +41,5 @@ def get_rating_statistics(ratings_per_user, ratings_per_movie):
         "Least rated movie": int(ratings_per_movie.min()),
     }
     return stats
+
+
