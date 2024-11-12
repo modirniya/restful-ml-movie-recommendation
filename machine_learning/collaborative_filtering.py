@@ -1,10 +1,7 @@
 from scipy.sparse import csr_matrix
 from sklearn.neighbors import NearestNeighbors
+
 from machine_learning.utils import *
-
-
-from scipy.sparse import csr_matrix
-from sklearn.neighbors import NearestNeighbors
 
 USER_ID_COL = 'userId'
 MOVIE_ID_COL = 'movieId'
