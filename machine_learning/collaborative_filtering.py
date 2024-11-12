@@ -1,6 +1,6 @@
 from scipy.sparse import csr_matrix
 from sklearn.neighbors import NearestNeighbors
-from machine_learning.utils import calculate_sparsity, get_rating_statistics, plot_rating_distribution
+from machine_learning.utils import *
 
 
 class CollaborativeFilteringEngine:
@@ -28,7 +28,8 @@ class CollaborativeFilteringEngine:
         user_indices = [self.user_index_map[user_id] for user_id in self.ratings_data['userId']]
         movie_indices = [self.movie_index_map[movie_id] for movie_id in self.ratings_data['movieId']]
 
-        self.user_movie_matrix = csr_matrix((self.ratings_data["rating"], (user_indices, movie_indices)), shape=(num_users, num_movies))
+        self.user_movie_matrix = csr_matrix((self.ratings_data["rating"], (user_indices, movie_indices)),
+                                            shape=(num_users, num_movies))
         self.user_ratings_count = self.user_movie_matrix.getnnz(axis=1)
         self.movie_ratings_count = self.user_movie_matrix.getnnz(axis=0)
 
@@ -53,6 +54,10 @@ class CollaborativeFilteringEngine:
         """Uses utils to get basic statistics."""
         return get_rating_statistics(self.user_ratings_count, self.movie_ratings_count)
 
-    def plot_distributions(self):
+    def plot_ratings_density(self):
+        """Uses utils to plot rating density."""
+        plot_ratings_density(self.user_ratings_count, self.movie_ratings_count)
+
+    def plot_ratings_distribution(self):
         """Uses utils to plot rating distributions."""
-        plot_rating_distribution(self.user_ratings_count, self.movie_ratings_count)
+        plot_ratings_distribution(self.ratings_data)

@@ -77,9 +77,11 @@ class MovieRecommendationEngine:
 
         return recommendations, method_used, matched_title
 
-    def show_statistics(self):
+    def show_statistics(self, show_plot=False):
         """Displays statistics using utils and engines."""
         print("Collaborative Filtering Statistics:")
         print(self.collaborative_filtering.get_statistics())
         print(f"Sparsity Rate: {self.collaborative_filtering.get_sparsity():.2f}")
-        # self.collaborative_filtering.plot_distributions()
+        if show_plot:
+            self.collaborative_filtering.plot_ratings_distribution()
+            self.collaborative_filtering.plot_ratings_density()

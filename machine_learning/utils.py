@@ -9,7 +9,7 @@ def calculate_sparsity(matrix):
     return total_ratings / total_elements
 
 
-def plot_rating_distribution(ratings_per_user, ratings_per_movie):
+def plot_ratings_density(ratings_per_user, ratings_per_movie):
     """Plots distribution of ratings per user and ratings per movie."""
     plt.figure(figsize=(16, 4))
 
@@ -27,6 +27,11 @@ def plot_rating_distribution(ratings_per_user, ratings_per_movie):
     plt.xlabel("Ratings per Movie")
     plt.ylabel("Density")
 
+    plt.show()
+
+def plot_ratings_distribution(ratings):
+    sns.countplot(x="rating", data=ratings, palette="viridis")
+    plt.title("Distribution of movie ratings", fontsize=14)
     plt.show()
 
 
