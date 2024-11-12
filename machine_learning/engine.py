@@ -85,3 +85,4 @@ class MovieRecommendationEngine:
         if show_plot:
             self.collaborative_filtering.plot_ratings_distribution()
             self.collaborative_filtering.plot_ratings_density()
+            self.content_filtering.plot_genre_frequencies()
