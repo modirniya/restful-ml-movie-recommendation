@@ -5,9 +5,7 @@ from machine_learning.engine import MovieRecommendationEngine
 app = Flask(__name__)
 
 # Initialize the recommendation engine
-ratings_path = './data/raw/ratings.csv'
-movies_path = './data/raw/movies.csv'
-recommendation_engine = MovieRecommendationEngine(ratings_path=ratings_path, movies_path=movies_path)
+recommendation_engine = MovieRecommendationEngine()
 
 @app.route('/recommend', methods=['GET'])
 def recommend_movies():

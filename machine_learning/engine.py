@@ -7,7 +7,10 @@ from fuzzywuzzy import process
 
 
 class MovieRecommendationEngine:
-    def __init__(self, ratings_path, movies_path, min_ratings_threshold=5):
+    ratings_path = './data/raw/ratings.csv'
+    movies_path = './data/raw/movies.csv'
+
+    def __init__(self, ratings_path=ratings_path, movies_path=movies_path, min_ratings_threshold=5):
         print("Initializing MovieRecommendationEngine...")
 
         # Validate min_ratings_threshold
@@ -20,7 +23,7 @@ class MovieRecommendationEngine:
         self.movies_data = pd.read_csv(movies_path)
         self.collaborative_filtering = CollaborativeFilteringEngine(self.ratings_data)
         self.content_filtering = ContentFilteringEngine(self.movies_data)
-        self.merged_ratings =  self.ratings_data.merge(self.movies_data, on='movieId')
+        self.merged_ratings = self.ratings_data.merge(self.movies_data, on='movieId')
         self.movie_titles = dict(zip(self.movies_data['movieId'], self.movies_data['title']))
 
     @property
