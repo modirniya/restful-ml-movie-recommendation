@@ -99,6 +99,9 @@ movie-recommendation-cli-api/
 
 If you'd like to contribute, please fork the repository and use a feature branch. Pull requests are warmly welcome.
 
+## Acknowledgments
+This project drew inspiration from various resources on building recommender systems. Special thanks to Jill Cates, Data Scientist at Shopify, for her presentation on the Toronto Machine Learning Series (TMLS) channel, titled “Building a MovieLens Recommender System.” This video provided valuable insights into the structure and implementation of recommendation algorithms.
+
 ## License
 
 This project is open-source and available under the [MIT License](https://mit-license.org/).
