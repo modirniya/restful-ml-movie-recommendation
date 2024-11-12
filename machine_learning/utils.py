@@ -2,6 +2,8 @@ import pandas as pd
 import seaborn as sns
 from matplotlib import pyplot as plt
 
+CREST_PALETTE = "crest"
+
 
 def calculate_sparsity(matrix):
     """Calculates the sparsity rate of a given matrix."""
@@ -30,16 +32,23 @@ def plot_ratings_density(ratings_per_user, ratings_per_movie):
 
     plt.show()
 
+
 def plot_ratings_distribution(ratings):
-    sns.countplot(x="rating", data=ratings, palette="viridis")
+    sns.countplot(x="rating", data=ratings, palette=CREST_PALETTE)
     plt.title("Distribution of movie ratings", fontsize=14)
     plt.show()
+
 
 def plot_genre_frequencies(genre_counts):
     genre_frequency_df = pd.DataFrame([genre_counts]).T.reset_index()
     genre_frequency_df.columns = ['genre', 'count']
-    sns.barplot(x='genre', y='count', data=genre_frequency_df.sort_values(by='count', ascending=False))
-    plt.xticks(rotation=90)
+    sns.barplot(x='genre', y='count', data=genre_frequency_df.sort_values(by='count', ascending=False),
+                palette=CREST_PALETTE)
+    plt.xticks(rotation=90, ha='right', fontsize=10)
+    plt.yticks(fontsize=10)
+    plt.ylabel("Number of movies", )
+    plt.title("Distribution of movie genres", )
+    plt.subplots_adjust(bottom=0.4)
     plt.show()
 
 
@@ -54,5 +63,3 @@ def get_rating_statistics(ratings_per_user, ratings_per_movie):
         "Least rated movie": int(ratings_per_movie.min()),
     }
     return stats
-
-
